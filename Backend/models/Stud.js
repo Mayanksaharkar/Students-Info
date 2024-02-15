@@ -19,11 +19,15 @@ const StudSchema = new Schema({
         type: String,
         required: true,
     },
+    dob: {
+        type: Date,
+        required: false,
+    },
     program: {
         type: String,
         required: true,
     },
-    maritialStatus: {
+    maritalStatus: {
         type: String,
         required: true,
     },

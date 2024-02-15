@@ -11,24 +11,25 @@ app.use(cors());
 const port = 8080;
 
 // routes here
+
+
+
 app.post('/create', async (req, res) => {
     try {
-        const { id, fname, lname, address, program, maritialStatus, country } = req.body;
-        const stud = await Stud.find({ id: req.params.id });
+        const { id, fname, lname, address, program, dob, maritalStatus, country } = req.body;
+        const stud = await Stud.findOne({ id: req.params.id });
         if (!stud) {
-            const newStud = new Stud({ id, fname, lname, address, program, maritialStatus, country });
+            const newStud = new Stud({ id, fname, lname, address, program, dob, maritalStatus, country });
             const savedStud = await newStud.save();
             res.json(savedStud).status(200);
         }
         else {
-            res.send("Already Exists!").status(400);
+            res.status(400).send("Already Exists!");
         }
-
-
-
     } catch (error) {
         console.log(error);
         res.status(500).send("Something went wrong!");
+        console.log("Debugging error:", error);
     }
 })
 app.get('/students', async (req, res) => {
@@ -63,7 +64,7 @@ app.put('/update/:id', async (req, res) => {
         stud.lname = lname;
         stud.address = address;
         stud.program = program;
-        stud.maritialStatus = maritialStatus;
+        stud.maritalStatus = maritialStatus;
         stud.country = country;
         const updatedStud = await stud.save();
         res.json(updatedStud).status(200);
