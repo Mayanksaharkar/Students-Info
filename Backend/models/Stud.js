@@ -4,7 +4,8 @@ const { Schema } = mongoose;
 const StudSchema = new Schema({
     id: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     fname: {
         type: String,
